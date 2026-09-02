@@ -1,0 +1,14 @@
+{
+  "name": "digital-bahi",
+  "version": "1.0.0",
+  "description": "Digital Bahi - Tractor/JCB Accounting Software",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^27.0.0"
+  }
+}
