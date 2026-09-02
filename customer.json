@@ -1,0 +1,11 @@
+[
+  {
+    "id": "1",
+    "name": "Ram Singh",
+    "phone": "9876543210",
+    "village": "Kheri",
+    "photo": "data:image/jpeg;base64,...",
+    "balance": 2400,
+    "tractorRate": 900
+  }
+]
