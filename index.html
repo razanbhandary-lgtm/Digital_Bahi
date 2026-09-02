@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Bahi</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>📒 Digital Bahi</h1>
+      <div class="header-controls">
+        <span id="tractor-rate">🚜 Rate: ₹800/hr</span>
+        <button onclick="showTractorSettings()">⚙️ Settings</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="dashboard">📊 Dashboard</button>
+      <button class="tab-btn" data-tab="customers">👥 Customers</button>
+      <button class="tab-btn" data-tab="transactions">💰 Transactions</button>
+      <button class="tab-btn" data-tab="soil">🌾 Soil Records</button>
+      <button class="tab-btn" data-tab="tractors">🚜 Tractors</button>
+    </nav>
+
+    <div class="content">
+      <!-- Dashboard -->
+      <div id="dashboard" class="tab-content active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Customers</h3>
+            <p id="total-customers">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Due</h3>
+            <p id="total-due">₹0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Today's Transactions</h3>
+            <p id="today-transactions">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Soil Remaining</h3>
+            <p id="soil-remaining">0</p>
+          </div>
+        </div>
+        <div class="recent-section">
+          <h3>Recent Activity</h3>
+          <div id="recent-list"></div>
+        </div>
+      </div>
+
+      <!-- Customers -->
+      <div id="customers" class="tab-content">
+        <div class="search-bar">
+          <input type="text" id="customer-search" placeholder="🔍 Search customer by name..." oninput="filterCustomers()">
+          <button onclick="showAddCustomer()">➕ Add Customer</button>
+        </div>
+        <div id="customer-list" class="customer-grid"></div>
+      </div>
+
+      <!-- Transactions -->
+      <div id="transactions" class="tab-content">
+        <div class="transaction-form">
+          <h3>New Transaction</h3>
+          <select id="trans-customer"><option value="">Select Customer</option></select>
+          <select id="trans-type">
+            <option value="tractor">🚜 Tractor</option>
+            <option value="jcb">🏗️ JCB</option>
+            <option value="soil">🌾 Soil</option>
+          </select>
+          <input type="number" id="trans-hours" placeholder="Hours worked">
+          <input type="number" id="trans-minutes" placeholder="Minutes" value="0">
+          <input type="number" id="trans-rate" placeholder="Rate per hour (auto-filled)" readonly>
+          <input type="number" id="trans-amount" placeholder="Total Amount" readonly>
+          <input type="number" id="trans-paid" placeholder="Amount Paid">
+          <textarea id="trans-notes" placeholder="Notes (field name, etc.)"></textarea>
+          <button onclick="saveTransaction()">💾 Save Transaction</button>
+        </div>
+        <div id="transaction-list"></div>
+      </div>
+
+      <!-- Soil Records -->
+      <div id="soil" class="tab-content">
+        <div class="soil-form">
+          <h3>Add Soil Record</h3>
+          <select id="soil-owner"><option value="">Select Tractor Owner</option></select>
+          <input type="number" id="soil-tons" placeholder="Tons of soil">
+          <input type="number" id="soil-rate" placeholder="Rate per ton">
+          <input type="text" id="soil-buyer" placeholder="Buyer name">
+          <input type="date" id="soil-date">
+          <button onclick="saveSoilRecord()">💾 Save Soil Record</button>
+        </div>
+        <div id="soil-list"></div>
+      </div>
+
+      <!-- Tractors -->
+      <div id="tractors" class="tab-content">
+        <div class="tractor-form">
+          <h3>Manage Tractors</h3>
+          <input type="text" id="tractor-name" placeholder="Tractor Name">
+          <input type="number" id="tractor-rate" placeholder="Rate per hour">
+          <button onclick="saveTractor()">💾 Save Tractor</button>
+        </div>
+        <div id="tractor-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div id="customer-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('customer-modal')">&times;</span>
+      <h2 id="modal-title">Add Customer</h2>
+      <input type="text" id="cust-name" placeholder="Full Name">
+      <input type="text" id="cust-phone" placeholder="Phone Number">
+      <input type="text" id="cust-village" placeholder="Village/Area">
+      <input type="file" id="cust-photo" accept="image/*">
+      <div id="photo-preview"></div>
+      <button onclick="saveCustomer()">💾 Save Customer</button>
+    </div>
+  </div>
+
+  <div id="tractor-settings-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('tractor-settings-modal')">&times;</span>
+      <h2>⚙️ Tractor Settings</h2>
+      <label>Default Rate per Hour</label>
+      <input type="number" id="settings-rate" value="800">
+      <button onclick="updateTractorSettings()">💾 Save Settings</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
